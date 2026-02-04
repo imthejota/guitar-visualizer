@@ -179,14 +179,20 @@ select:focus {
   display: flex;
   margin-top: 10px;
   color: #666;
-  padding-left: 60px;
-  /* Offset for nut/open string */
+  padding-left: 0;
 }
 
 .fret-number {
   flex: 1;
   text-align: center;
   font-size: 0.8em;
+  min-width: 50px;
+  /* Match fret-cell min-width */
+}
+
+.fret-number:first-child {
+  flex: 0 0 60px;
+  /* Match open-string width */
 }
 
 .fret-marker {
