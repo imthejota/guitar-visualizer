@@ -7,7 +7,7 @@ const STRINGS = ['E', 'A', 'D', 'G', 'B', 'E'].reverse(); // Top to bottom visua
 // Let's standard: Top line = High E (1st string), Bottom line = Low E (6th string).
 const STRING_TUNING = ['E', 'B', 'G', 'D', 'A', 'E'];
 
-export const Fretboard = ({ activeNotes, tonic, fretCount = 24 }) => {
+export const Fretboard = ({ activeNotes, tonic, fretCount = 24, targetPosition = null, showLabels = true }) => {
     const FRET_COUNT = fretCount;
 
     const getNoteAtFret = (stringNote, fret) => {
@@ -23,7 +23,16 @@ export const Fretboard = ({ activeNotes, tonic, fretCount = 24 }) => {
                         {/* Render Frets for this string */}
                         {Array.from({ length: FRET_COUNT + 1 }).map((_, fretIndex) => {
                             const note = getNoteAtFret(stringNote, fretIndex);
-                            const isActive = activeNotes.includes(note);
+
+                            // If targetPosition is provided, logic is strict: only that specific cell is active
+                            // Otherwise, fallback to activeNotes array inclusion
+                            let isActive = false;
+                            if (targetPosition) {
+                                isActive = targetPosition.stringIndex === stringIndex && targetPosition.fretIndex === fretIndex;
+                            } else {
+                                isActive = activeNotes.includes(note);
+                            }
+
                             const isTonic = note === tonic;
 
                             return (
@@ -36,8 +45,8 @@ export const Fretboard = ({ activeNotes, tonic, fretCount = 24 }) => {
 
                                     {/* Note Dot */}
                                     {isActive && (
-                                        <div className={`note-dot ${isTonic ? 'tonic' : ''}`}>
-                                            {note}
+                                        <div className={`note-dot ${isTonic && !targetPosition ? 'tonic' : ''}`}>
+                                            {showLabels ? note : '?'}
                                         </div>
                                     )}
 
