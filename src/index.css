@@ -1,0 +1,220 @@
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #bb86fc;
+  --secondary-color: #03dac6;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --fret-color: #444;
+  --string-color: #666;
+  --note-active-bg: #bb86fc;
+  --note-active-text: #000;
+
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+select {
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+select:hover {
+  border-color: var(--primary-color);
+}
+
+select:focus {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.fretboard-container {
+  overflow-x: auto;
+  padding: 20px 0;
+  background: var(--surface-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.fretboard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  user-select: none;
+  min-width: 800px;
+  /* Ensure it doesn't squish */
+}
+
+.fretboard-neck {
+  border: 1px solid #333;
+  background: #2a2a2a;
+  /* Fretboard wood color dark */
+  position: relative;
+}
+
+.string {
+  display: flex;
+  position: relative;
+  height: 40px;
+  /* Space between strings */
+}
+
+/* The actual physical string line */
+.string-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #888;
+  z-index: 1;
+  transform: translateY(-50%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.string:nth-child(n+4) .string-line {
+  height: 3px;
+  /* Thicker for low strings */
+}
+
+.fret-cell {
+  flex: 1;
+  border-right: 2px solid #555;
+  /* Fret wire */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+}
+
+.fret-cell.open-string {
+  border-right: 4px solid #888;
+  /* Nut */
+  background-color: #222;
+  flex: 0 0 60px;
+}
+
+.note-dot {
+  width: 32px;
+  /* Slightly wider */
+  height: 28px;
+  border-radius: 14px;
+  /* Pill shape for longer text */
+  background: var(--secondary-color);
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.75em;
+  /* Smaller font for "C#/Db" */
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 0 4px;
+  /* Add padding */
+}
+
+.note-dot.tonic {
+  background: var(--primary-color);
+  transform: scale(1.1);
+  border: 2px solid #fff;
+  z-index: 11;
+}
+
+.fret-numbers {
+  display: flex;
+  margin-top: 10px;
+  color: #666;
+  padding-left: 60px;
+  /* Offset for nut/open string */
+}
+
+.fret-number {
+  flex: 1;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.fret-marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #555;
+  opacity: 0.5;
+  top: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.string:nth-child(3) .fret-marker {
+  top: 100%;
+  transform: translateY(-50%);
+  margin-top: 20px;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
