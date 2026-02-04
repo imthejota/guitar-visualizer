@@ -23,8 +23,6 @@ export const TriadsPage = () => {
                 scales={TRIADS}
             />
 
-            <ExportButton targetRef={contentRef} fileName={`${tonic}-${TRIADS[triadType].name}-Triad`} />
-
             <div ref={contentRef} style={{ padding: '20px', backgroundColor: '#121212' }}>
                 <h2 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>{tonic} {TRIADS[triadType].name} Triad</h2>
                 <div className="fretboard-container">
@@ -35,6 +33,8 @@ export const TriadsPage = () => {
                     <p>Notes: {activeNotes.join(' - ')}</p>
                 </div>
             </div>
+
+            <ExportButton targetRef={contentRef} fileName={`${tonic}-${TRIADS[triadType].name}-Triad`} />
         </div>
     );
 };

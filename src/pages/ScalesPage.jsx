@@ -23,8 +23,6 @@ export const ScalesPage = () => {
                 scales={SCALES}
             />
 
-            <ExportButton targetRef={contentRef} fileName={`${tonic}-${SCALES[scaleType].name}-Scale`} />
-
             <div ref={contentRef} style={{ padding: '20px', backgroundColor: '#121212' }}>
                 <h2 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>{tonic} {SCALES[scaleType].name}</h2>
                 <Fretboard activeNotes={activeNotes} tonic={tonic} />
@@ -54,6 +52,8 @@ export const ScalesPage = () => {
                     </div>
                 </div>
             </div>
+
+            <ExportButton targetRef={contentRef} fileName={`${tonic}-${SCALES[scaleType].name}-Scale`} />
         </div>
     );
 };

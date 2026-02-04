@@ -101,6 +101,8 @@ select:focus {
   user-select: none;
   min-width: 800px;
   /* Ensure it doesn't squish */
+  margin: 0 auto;
+  /* Center it */
 }
 
 .fretboard-neck {
