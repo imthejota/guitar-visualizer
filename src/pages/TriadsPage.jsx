@@ -23,7 +23,7 @@ export const TriadsPage = () => {
             />
 
             <div className="fretboard-container">
-                <Fretboard activeNotes={activeNotes} tonic={tonic} />
+                <Fretboard activeNotes={activeNotes} tonic={tonic} fretCount={20} />
             </div>
 
             <div className="current-scale-info" style={{ marginTop: '2rem', color: 'var(--text-secondary)' }}>

@@ -7,8 +7,8 @@ const STRINGS = ['E', 'A', 'D', 'G', 'B', 'E'].reverse(); // Top to bottom visua
 // Let's standard: Top line = High E (1st string), Bottom line = Low E (6th string).
 const STRING_TUNING = ['E', 'B', 'G', 'D', 'A', 'E'];
 
-export const Fretboard = ({ activeNotes, tonic }) => {
-    const FRET_COUNT = 24;
+export const Fretboard = ({ activeNotes, tonic, fretCount = 24 }) => {
+    const FRET_COUNT = fretCount;
 
     const getNoteAtFret = (stringNote, fret) => {
         const stringNoteIndex = NOTES.indexOf(stringNote);
