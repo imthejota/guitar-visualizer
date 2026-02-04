@@ -31,6 +31,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
+  /* Prevent body scroll */
 }
 
 #root {
@@ -39,58 +41,26 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  box-sizing: border-box;
+  /* Ensure padding is contained */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
-}
-
-.controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-select {
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--surface-color);
-  color: var(--text-primary);
-  border: 1px solid #333;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-select:hover {
-  border-color: var(--primary-color);
-}
-
-select:focus {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+/* ... headers ... */
 
 .fretboard-container {
   overflow-x: auto;
+  /* Allow internal scroll */
   padding: 20px 0;
   background: var(--surface-color);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 90vw;
+  /* Ensure it fits within viewport width with some margin */
+  margin: 0 auto;
+  /* Center the container itself */
+  /* Scrollbar styling for smoother feel */
+  -webkit-overflow-scrolling: touch;
 }
 
 .fretboard {
