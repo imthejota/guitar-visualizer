@@ -8,7 +8,7 @@ const STRINGS = ['E', 'A', 'D', 'G', 'B', 'E'].reverse(); // Top to bottom visua
 const STRING_TUNING = ['E', 'B', 'G', 'D', 'A', 'E'];
 
 export const Fretboard = ({ activeNotes, tonic }) => {
-    const FRET_COUNT = 15;
+    const FRET_COUNT = 24;
 
     const getNoteAtFret = (stringNote, fret) => {
         const stringNoteIndex = NOTES.indexOf(stringNote);
@@ -42,8 +42,8 @@ export const Fretboard = ({ activeNotes, tonic }) => {
                                     )}
 
                                     {/* Fret Marker Dots (Single/Double) */}
-                                    {stringIndex === 2 && [3, 5, 7, 9].includes(fretIndex) && <div className="fret-marker single"></div>}
-                                    {stringIndex === 2 && fretIndex === 12 && <div className="fret-marker double"></div>}
+                                    {stringIndex === 2 && [3, 5, 7, 9, 15, 17, 19, 21].includes(fretIndex) && <div className="fret-marker single"></div>}
+                                    {stringIndex === 2 && [12, 24].includes(fretIndex) && <div className="fret-marker double"></div>}
                                     {/* NOTE: Markers usually span strings or are on the board. 
                        CSS implementation strategy: simple markers on a specific "layer" or simplified per cell.
                        Let's put markers in the middle (between 3rd and 4th string visually, or just on 3rd string).

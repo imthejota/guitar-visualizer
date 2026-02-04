@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { NOTES } from '../utils/musicTheory';
 
 const STRING_TUNING = ['E', 'B', 'G', 'D', 'A', 'E'];
-const FRET_COUNT = 15;
+const FRET_COUNT = 24;
 
 export const Fretboard = ({ activeNotes, tonic }) => {
     const getNoteAtFret = (stringNote, fret) => {
@@ -50,8 +50,8 @@ export const Fretboard = ({ activeNotes, tonic }) => {
                                         )}
 
                                         {/* Markers */}
-                                        {stringIndex === 2 && [3, 5, 7, 9].includes(fretIndex) && <View style={styles.singleMarker} />}
-                                        {stringIndex === 2 && fretIndex === 12 && <View style={styles.doubleMarker} />}
+                                        {stringIndex === 2 && [3, 5, 7, 9, 15, 17, 19, 21].includes(fretIndex) && <View style={styles.singleMarker} />}
+                                        {stringIndex === 2 && [12, 24].includes(fretIndex) && <View style={styles.doubleMarker} />}
                                     </View>
                                 );
                             })}
