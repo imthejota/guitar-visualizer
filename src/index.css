@@ -249,3 +249,23 @@ select:focus {
     opacity: 1;
   }
 }
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .fretboard-container {
+    max-width: calc(100vw - 2rem);
+    /* Account for root padding */
+    overflow-x: scroll;
+    /* Force scrollbar on mobile */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .fretboard {
+    min-width: 1200px;
+    /* Ensure it's wide enough to require scrolling */
+  }
+}
