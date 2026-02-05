@@ -37,12 +37,14 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1280px;
+  max-width: min(1280px, 100vw);
+  /* Constrain to viewport on mobile */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   box-sizing: border-box;
-  /* Ensure padding is contained */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 h1 {
@@ -92,18 +94,20 @@ select:focus {
 
 .fretboard-container {
   overflow-x: auto;
-  /* Allow internal scroll */
+  overflow-y: hidden;
+  /* Prevent vertical scroll within container */
   padding: 20px 0;
   background: var(--surface-color);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 90vw;
-  /* Ensure it fits within viewport width with some margin */
+  max-width: 100%;
+  /* Full width of parent */
   margin: 0 auto;
-  /* Center the container itself */
-  /* Scrollbar styling for smoother feel */
   -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  position: relative;
+  /* Establish positioning context */
 }
 
 .fretboard {
