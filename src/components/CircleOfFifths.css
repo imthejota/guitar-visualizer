@@ -1,0 +1,107 @@
+.circle-of-fifths {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.segment {
+    fill: var(--surface-color);
+    stroke: #444;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.segment.outer {
+    fill: #2a2a2a;
+}
+
+.segment.inner {
+    fill: #1e1e1e;
+}
+
+.segment:hover,
+.segment.hovered {
+    fill: var(--secondary-color);
+    opacity: 0.8;
+}
+
+.segment.selected {
+    fill: var(--primary-color);
+    stroke: var(--secondary-color);
+    stroke-width: 3;
+}
+
+.segment-text {
+    fill: var(--text-primary);
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.segment-text.minor {
+    font-size: 13px;
+    fill: var(--text-secondary);
+}
+
+.center-circle {
+    fill: var(--bg-color);
+    stroke: var(--primary-color);
+    stroke-width: 3;
+}
+
+.center-text {
+    fill: var(--primary-color);
+    font-size: 18px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.harm-text {
+    font-size: 10px;
+    user-select: none;
+}
+
+.harm-text.roman {
+    fill: var(--secondary-color);
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.harm-text.chord {
+    fill: var(--text-primary);
+    font-weight: 600;
+    font-size: 9px;
+}
+
+.harm-label {
+    opacity: 0.9;
+}
+
+.roman-numeral {
+    fill: var(--secondary-color);
+    font-size: 14px;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .circle-of-fifths {
+        max-width: 350px;
+    }
+
+    .segment-text {
+        font-size: 12px;
+    }
+
+    .segment-text.minor {
+        font-size: 10px;
+    }
+
+    .center-text {
+        font-size: 14px;
+    }
+}

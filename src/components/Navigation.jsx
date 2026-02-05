@@ -19,6 +19,14 @@ export const Navigation = () => {
             >
                 Quiz
             </NavLink>
+            {/* Circle of Fifths - Hidden for now
+            <NavLink
+                to="/circle-of-fifths"
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            >
+                Circle of Fifths
+            </NavLink>
+            */}
         </nav>
     );
 };
