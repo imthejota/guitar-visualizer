@@ -25,7 +25,10 @@ export const ScalesPage = () => {
 
             <div ref={contentRef} style={{ padding: '20px', backgroundColor: '#121212' }}>
                 <h2 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>{tonic} {SCALES[scaleType].name}</h2>
-                <Fretboard activeNotes={activeNotes} tonic={tonic} />
+
+                <div className="fretboard-container">
+                    <Fretboard activeNotes={activeNotes} tonic={tonic} />
+                </div>
 
                 <div className="current-scale-info" style={{ marginTop: '2rem', color: 'var(--text-secondary)' }}>
                     <div style={{ marginTop: '1rem', overflowX: 'auto' }}>
