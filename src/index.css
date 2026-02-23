@@ -108,6 +108,17 @@ select:focus {
   /* Smooth scrolling on iOS */
   position: relative;
   /* Establish positioning context */
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.fretboard-container::-webkit-scrollbar {
+  display: none;
 }
 
 .fretboard {
