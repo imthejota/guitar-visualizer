@@ -1,0 +1,53 @@
+.chords-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.chords-header {
+    text-align: center;
+}
+
+.chord-display-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-surface);
+    padding: 1.5rem 3rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.detected-chord {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    min-height: 40px;
+}
+
+.clear-btn {
+    background-color: var(--bg-element);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.clear-btn:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+    color: var(--bg-base);
+    transform: translateY(-1px);
+}
+
+.clear-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

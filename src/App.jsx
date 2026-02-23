@@ -3,6 +3,7 @@ import { Navigation } from './components/Navigation';
 import { ScalesPage } from './pages/ScalesPage';
 import { TriadsPage } from './pages/TriadsPage';
 import { QuizPage } from './pages/QuizPage';
+import { ChordsPage } from './pages/ChordsPage';
 // import { CircleOfFifthsPage } from './pages/CircleOfFifthsPage'; // Hidden for now
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<ScalesPage />} />
           <Route path="/triads" element={<TriadsPage />} />
           <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/chords" element={<ChordsPage />} />
           {/* <Route path="/circle-of-fifths" element={<CircleOfFifthsPage />} /> */}
         </Routes>
       </div>

@@ -7,7 +7,7 @@ const STRINGS = ['E', 'A', 'D', 'G', 'B', 'E'].reverse(); // Top to bottom visua
 // Let's standard: Top line = High E (1st string), Bottom line = Low E (6th string).
 const STRING_TUNING = ['E', 'B', 'G', 'D', 'A', 'E'];
 
-export const Fretboard = ({ activeNotes, tonic, fretCount = 24, targetPosition = null, showLabels = true }) => {
+export const Fretboard = ({ activeNotes = [], tonic, fretCount = 24, targetPosition = null, selectedPositions = [], onFretClick, showLabels = true }) => {
     const FRET_COUNT = fretCount;
 
     const getNoteAtFret = (stringNote, fret) => {
@@ -24,19 +24,40 @@ export const Fretboard = ({ activeNotes, tonic, fretCount = 24, targetPosition =
                         {Array.from({ length: FRET_COUNT + 1 }).map((_, fretIndex) => {
                             const note = getNoteAtFret(stringNote, fretIndex);
 
-                            // If targetPosition is provided, logic is strict: only that specific cell is active
-                            // Otherwise, fallback to activeNotes array inclusion
+                            // Check active state logic
                             let isActive = false;
+
+                            // 1. Single strict target position (used in Quiz)
                             if (targetPosition) {
                                 isActive = targetPosition.stringIndex === stringIndex && targetPosition.fretIndex === fretIndex;
-                            } else {
+                            }
+                            // 2. Specific selected positions (used in Chords module)
+                            else if (selectedPositions.length > 0) {
+                                isActive = selectedPositions.some(
+                                    pos => pos.stringIndex === stringIndex && pos.fretIndex === fretIndex
+                                );
+                            }
+                            // 3. Fallback to activeNotes array inclusion (Scales & Triads modules)
+                            else {
                                 isActive = activeNotes.includes(note);
                             }
 
                             const isTonic = note === tonic;
 
+                            // Fret click handler
+                            const handleFretClick = () => {
+                                if (onFretClick) {
+                                    onFretClick(stringIndex, fretIndex, note);
+                                }
+                            };
+
                             return (
-                                <div key={fretIndex} className={`fret-cell ${fretIndex === 0 ? 'open-string' : ''}`}>
+                                <div
+                                    key={fretIndex}
+                                    className={`fret-cell ${fretIndex === 0 ? 'open-string' : ''} ${onFretClick ? 'clickable' : ''}`}
+                                    onClick={handleFretClick}
+                                    style={{ cursor: onFretClick ? 'pointer' : 'default' }}
+                                >
                                     {/* String Line */}
                                     <div className="string-line"></div>
 
@@ -45,7 +66,7 @@ export const Fretboard = ({ activeNotes, tonic, fretCount = 24, targetPosition =
 
                                     {/* Note Dot */}
                                     {isActive && (
-                                        <div className={`note-dot ${isTonic && !targetPosition ? 'tonic' : ''}`}>
+                                        <div className={`note-dot ${isTonic && !targetPosition && selectedPositions.length === 0 ? 'tonic' : ''}`}>
                                             {showLabels ? note : '?'}
                                         </div>
                                     )}

@@ -96,3 +96,101 @@ export const getHarmonization = (tonic, scaleType) => {
     };
   });
 };
+
+/**
+ * Detects the chord name based on an array of notes.
+ * Assumes notes are ordered from lowest pitch to highest pitch.
+ */
+export const detectChord = (notes) => {
+  if (!notes || notes.length === 0) return 'No Notes Selected';
+
+  // Extract unique note names (ignoring octaves if we had them, but here we just have 'C', 'C#/Db', etc.)
+  // We want to keep the bass note as the first unique note.
+  const uniqueNotes = [];
+  for (const note of notes) {
+    if (!uniqueNotes.includes(note)) {
+      uniqueNotes.push(note);
+    }
+  }
+
+  const bassNote = uniqueNotes[0];
+  if (uniqueNotes.length === 1) return bassNote;
+
+  // Function to calculate semitone interval between two notes
+  const getInterval = (n1, n2) => {
+    let index1 = NOTES.indexOf(n1);
+    let index2 = NOTES.indexOf(n2);
+    if (index1 === -1 || index2 === -1) return 0;
+
+    let diff = index2 - index1;
+    if (diff < 0) diff += 12;
+    return diff;
+  };
+
+  if (uniqueNotes.length === 2) {
+    const interval = getInterval(uniqueNotes[0], uniqueNotes[1]);
+    if (interval === 7) return `${uniqueNotes[0]}5 (Power Chord)`;
+    if (interval === 5) return `${uniqueNotes[1]}5 (Power Chord)`; // Inverted power chord
+    return 'Interval';
+  }
+
+  // Generate all rotations of the unique notes to check every possible root
+  const getChordForRoot = (rootNote, chordNotes) => {
+    // Calculate intervals from root
+    const intervalsFromRoot = chordNotes.map(note => getInterval(rootNote, note)).sort((a, b) => a - b);
+
+    // Helper to check if intervals contain specific semi-tones
+    const has = (interval) => intervalsFromRoot.includes(interval);
+
+    let chordName = null;
+
+    // Check Triads
+    if (intervalsFromRoot.length === 3) {
+      if (has(4) && has(7)) chordName = `${rootNote} Major`;
+      else if (has(3) && has(7)) chordName = `${rootNote} Minor`;
+      else if (has(3) && has(6)) chordName = `${rootNote} Diminished`;
+      else if (has(4) && has(8)) chordName = `${rootNote} Augmented`;
+      else if (has(2) && has(7)) chordName = `${rootNote} Sus2`;
+      else if (has(5) && has(7)) chordName = `${rootNote} Sus4`;
+    }
+    // Check 7th Chords (4 notes)
+    else if (intervalsFromRoot.length === 4) {
+      if (has(4) && has(7) && has(11)) chordName = `${rootNote}maj7`;
+      else if (has(4) && has(7) && has(10)) chordName = `${rootNote}7`;
+      else if (has(3) && has(7) && has(10)) chordName = `${rootNote}m7`;
+      else if (has(3) && has(7) && has(11)) chordName = `${rootNote}m(maj7)`;
+      else if (has(3) && has(6) && has(10)) chordName = `${rootNote}m7b5`;
+      else if (has(3) && has(6) && has(9)) chordName = `${rootNote}dim7`;
+      else if (has(4) && has(8) && has(10)) chordName = `${rootNote}aug7`;
+      else if (has(4) && has(8) && has(11)) chordName = `${rootNote}aug(maj7)`;
+    }
+
+    // Check standard triad + added notes (e.g. add9) if needed here in future
+    return chordName;
+  };
+
+  // Try each unique note as the potential root
+  let detectedChord = null;
+  let root = null;
+
+  for (let i = 0; i < uniqueNotes.length; i++) {
+    const candidateRoot = uniqueNotes[i];
+    const result = getChordForRoot(candidateRoot, uniqueNotes);
+    if (result) {
+      detectedChord = result;
+      root = candidateRoot;
+      break; // Found a matching standard chord structure
+    }
+  }
+
+  if (detectedChord) {
+    // Check if it's an inversion
+    if (bassNote !== root) {
+      return `${detectedChord}/${bassNote}`;
+    }
+    return detectedChord;
+  }
+
+  // If we couldn't match a standard chord, just list notes
+  return `Custom Chord: ${uniqueNotes.join('-')}`;
+};
