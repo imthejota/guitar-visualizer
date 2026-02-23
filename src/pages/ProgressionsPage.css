@@ -1,0 +1,130 @@
+.progressions-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.progressions-header {
+    text-align: center;
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.generator-controls {
+    background-color: var(--bg-surface);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0;
+    /* Override generic .controls margin */
+}
+
+.invalid-warning {
+    color: #cf6679;
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+}
+
+.generate-btn {
+    background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--bg-base);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: fit-content;
+}
+
+.generate-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.4);
+}
+
+.generate-btn:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.progression-results {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: slideDown 0.4s ease-out;
+}
+
+.progression-results h3 {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.progression-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.chord-card {
+    background-color: var(--bg-surface);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+}
+
+.chord-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-color);
+}
+
+.chord-number {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.chord-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

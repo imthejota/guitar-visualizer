@@ -4,7 +4,7 @@ import { ScalesPage } from './pages/ScalesPage';
 import { TriadsPage } from './pages/TriadsPage';
 import { QuizPage } from './pages/QuizPage';
 import { ChordsPage } from './pages/ChordsPage';
-// import { CircleOfFifthsPage } from './pages/CircleOfFifthsPage'; // Hidden for now
+import { ProgressionsPage } from './pages/ProgressionsPage';
 import './App.css';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path="/triads" element={<TriadsPage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/chords" element={<ChordsPage />} />
-          {/* <Route path="/circle-of-fifths" element={<CircleOfFifthsPage />} /> */}
+          <Route path="/progressions" element={<ProgressionsPage />} />
         </Routes>
       </div>
     </Router>

@@ -25,14 +25,12 @@ export const Navigation = () => {
             >
                 Chords
             </NavLink>
-            {/* Circle of Fifths - Hidden for now
             <NavLink
-                to="/circle-of-fifths"
+                to="/progressions"
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
-                Circle of Fifths
+                Progressions
             </NavLink>
-            */}
         </nav>
     );
 };
